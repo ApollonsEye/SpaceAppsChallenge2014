@@ -1,0 +1,3 @@
+# Use absolute paths
+30 15 * * * /opt/local/bin/python /Users/xxxxx/Git/SpaceAppsChallenge2014/Hue/spaceweather.py
+# * * * * * /opt/local/bin/python /Users/xxxxx/Git/SpaceAppsChallenge2014/Hue/ace.py
