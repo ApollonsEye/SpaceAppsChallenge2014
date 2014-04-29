@@ -1,0 +1,220 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context="ishi_daishi.jp.ne.biglobe.www7b.apollonseye.CameraFragment" >
+
+	<!-- オーバーレイ用のSurfaceView -->
+	<ishi_daishi.jp.ne.biglobe.www7b.apollonseye.ui.OverlaySurfaceView
+		android:id="@+id/OverlayView"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:theme="@android:style/Theme.Translucent"/>
+
+	<!-- カメラ用のSurfaceView -->
+	<SurfaceView
+		android:id="@+id/CameraView"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent" />
+
+	<!-- 画面情報用のLinearView -->
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:theme="@android:style/Theme.Translucent" >
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="horizontal"
+			android:theme="@android:style/Theme.Translucent" >
+
+			<!-- プログレス用のLinearView -->
+			<!-- ※現在は３本固定で表示 -->
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_weight="0.20"
+				android:orientation="vertical"
+				android:theme="@android:style/Theme.Translucent" >
+
+			    <!-- プログレスバー1個目 -->
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="#77000000" >
+
+					<TextView
+						android:id="@+id/textView1"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:padding="5dp"
+						android:text="Proton Density"
+						android:textAppearance="?android:attr/textAppearanceMedium"
+					    android:textColor="#FFFF00FF"
+						android:textSize="15sp" />
+
+					<ProgressBar
+						android:id="@+id/progressBar1"
+						style="?android:attr/progressBarStyleHorizontal"
+						android:padding="5dp"
+						android:progressDrawable="@drawable/progressbar_purple"
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent"
+						 />
+				</LinearLayout>
+
+				<!-- プログレスバー2個目 -->
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="#77000000" >
+
+					<TextView
+						android:id="@+id/textView2"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:padding="5dp"
+						android:text="Bulk Speed"
+						android:textAppearance="?android:attr/textAppearanceMedium"
+					    android:textColor="#FF00FF00"
+						android:textSize="15sp" />
+
+					<ProgressBar
+						android:id="@+id/progressBar2"
+						style="?android:attr/progressBarStyleHorizontal"
+						android:padding="5dp"
+						android:progressDrawable="@drawable/progressbar_green"
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent" />
+				</LinearLayout>
+
+				<!-- プログレスバー3個目 -->
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="#77000000" >
+
+					<TextView
+						android:id="@+id/textView3"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:padding="5dp"
+						android:text=""
+						android:textAppearance="?android:attr/textAppearanceMedium"
+					    android:textColor="#FFFF0000"
+						android:textSize="10sp" />
+
+<!-- 					<ProgressBar
+						android:id="@+id/progressBar3"
+						style="?android:attr/progressBarStyleHorizontal"
+						android:padding="5dp"
+						android:progressDrawable="@drawable/progressbar_red"
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent" />
+ -->
+				</LinearLayout>
+
+				<!-- プログレスバー4個目 -->
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="#77000000" >
+
+					<TextView
+						android:id="@+id/textView4"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:padding="5dp"
+						android:text="X-Ray(short)"
+						android:textAppearance="?android:attr/textAppearanceMedium"
+					    android:textColor="#FFFF0000"
+						android:textSize="15sp" />
+
+					<ProgressBar
+						android:id="@+id/progressBar3"
+						style="?android:attr/progressBarStyleHorizontal"
+						android:padding="5dp"
+						android:progressDrawable="@drawable/progressbar_red"
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent" />
+ 				</LinearLayout>
+
+				<!-- プログレスバー5個目 -->
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="#77000000" >
+
+					<TextView
+						android:id="@+id/textView5"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:padding="5dp"
+						android:text="X-Ray(long)"
+						android:textAppearance="?android:attr/textAppearanceMedium"
+					    android:textColor="#FFFFFF00"
+						android:textSize="15sp" />
+
+					<ProgressBar
+						android:id="@+id/progressBar5"
+						style="?android:attr/progressBarStyleHorizontal"
+						android:padding="5dp"
+						android:progressDrawable="@drawable/progressbar_yellow"
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent" />
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<!-- ダミーのレイアウト(スペース用) -->
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_weight="0.60"
+				android:theme="@android:style/Theme.Translucent" >
+			</FrameLayout>
+
+			<!-- 状態アイコン表示用LinearLayout -->
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_weight="0.20"
+				android:orientation="vertical"
+				android:theme="@android:style/Theme.Translucent" >
+
+				<ImageView
+					android:id="@+id/imageStatusView"
+					android:layout_width="180dp"
+					android:layout_height="180dp"
+					android:scaleType="fitStart"
+					android:adjustViewBounds="true"
+					android:layout_gravity="right"
+					android:src="@drawable/ic_sts_safety" />
+
+			</LinearLayout>
+		</LinearLayout>
+	</LinearLayout>
+
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:orientation="horizontal"
+			android:gravity="bottom"
+		>
+
+			<!-- おしらせ表示用TextView(テスト用) -->
+			<TextView
+			    android:id="@+id/textStatusView"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:background="#77FFFFFF"
+			    android:padding="5dp"
+			    android:text="Downloading solar data...\nPlease wait for a while!"
+			    android:textAppearance="?android:attr/textAppearanceMedium"
+			    android:textColor="#FFFFAA00"
+				android:textSize="20sp" />
+
+		</LinearLayout>
+</RelativeLayout>
