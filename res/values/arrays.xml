@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="select_data">
-        <item>2014/1/8</item>
-        <item>Last 1 year</item>
-        <item>For 1 hour</item>
-    </string-array>
-
-</resources>
