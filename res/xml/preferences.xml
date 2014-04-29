@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- ファイルDL関連 -->
+	<PreferenceCategory android:title="Data">
+		<Preference
+        	android:key="@string/key_file_download"
+            android:summary=""
+            android:title="Data selection(Unavailable now)" />
+	</PreferenceCategory>
+	
+	<!-- データ再生関連 -->
+	<PreferenceCategory android:title="Animation">
+	    <EditTextPreference 
+            android:key="@string/key_interval_time"
+            android:title="Screen refresh interval[ms]"
+            android:dialogTitle="Input value in ms"
+            android:inputType="number"
+            android:maxLength="5"
+            android:defaultValue="300"
+            android:summary=""/>
+	</PreferenceCategory>
+
+     	<PreferenceCategory android:title="About...">
+	     <PreferenceScreen   
+           android:summary="You can feel the Solar condition with this application.\nData source:\n
+  http://www.swpc.noaa.gov/ftpdir/lists/ace/ace_swepam_1m.txt\n
+  http://www.swpc.noaa.gov/ftpdir/lists/xray/Gp_xr_1m.txt\n*The visuals are just an image of a real situation."   
+           android:title=""   
+           android:key="+@string/pref_screen">  
+         </PreferenceScreen>
+	</PreferenceCategory>
+
+</PreferenceScreen>
