@@ -28,8 +28,5 @@ If the network is unavailable, visualize pre-installed data.
 - EPSON MOVERIO BT-200 (Android 4.0)  
 - and more...
 
-##[Known issues]
-Sometimes crash after few minutes.
-
 ##[Special thanks]
 This app is created by "Team*invader" which won first prize at "International Space Apps Challenge 2014 Tokyo".
