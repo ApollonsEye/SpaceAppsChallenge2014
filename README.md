@@ -25,6 +25,7 @@ Taking advantage of LED bulbs Alert, more detailed information can be checked by
 ##Hardwares
 - [Philips Hue](http://meethue.com/)
 - [EPSON MOVERIO BT-200](http://www.epson.com/cgi-bin/Store/jsp/Landing/moverio-bt-200-smart-glasses.do)
+- Android smartphones
 
 ##Data Sources
 - [Space Weather Forecast by NICT](http://swc.nict.go.jp/contents/index_e.php)
