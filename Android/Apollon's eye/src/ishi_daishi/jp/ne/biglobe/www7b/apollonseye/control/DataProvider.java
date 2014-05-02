@@ -43,7 +43,7 @@ public class DataProvider {
 	private String[] cell;
 	private String[][] preparedData;  // 整形済みデータ配列
 
-	// コンストラクタ *色々と古いので使わないこと
+	// コンストラクタ ※色々と古いので使わないこと
 	public DataProvider ( Vector data ) {
 //		time1 = time2 = System.currentTimeMillis();
 //		temp = 0;
@@ -192,39 +192,36 @@ public class DataProvider {
 
 				// 年月日日時
 				preparedData[j][0] = cell[0] + "/" + cell[1] + "/" + cell[2] + " " + cell[3].substring(0, 2) + ":" + cell[3].substring(2, 4);
+
 /*
+				// Calendarで日付処理を行う
+				// reference: http://d.hatena.ne.jp/shuji_w6e/20110326/1301126280
+				// ※何故か正しく変換されない
 				Log.v("debug:org", preparedData[j][0]);
-			    Date d = null;
-			    DateFormat df1 = new SimpleDateFormat("yyyy/MM/dd hh:mm");
-				df1.setTimeZone(TimeZone.getTimeZone("UTC"));
-				try {
-//					d = df2.parse("2011/03/23 10:23 UTC");
-//					d = df2.parse(preparedData[j][0] + " GMT");
-					d = df1.parse(preparedData[j][0]);
-					Log.v("debug:UTC", df1.format(d));
+				Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+			    DateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+			    try {
+					sdf1.setTimeZone(TimeZone.getTimeZone("UTC"));
+					cal.setTime(sdf1.parse(preparedData[j][0]));
+					Log.v("debug:UTC", sdf1.format(cal.getTime()));
+
+					sdf1.setTimeZone(TimeZone.getDefault());
+					Log.v("debug:local", sdf1.format(cal.getTime()));
+					sdf1.setTimeZone(TimeZone.getTimeZone("Japan"));
+					Log.v("debug:Japan", sdf1.format(cal.getTime()));
+					sdf1.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+					Log.v("debug:NY", sdf1.format(cal.getTime()));
 				} catch (ParseException e) {
 					Log.v("debug:", e.toString());
 				}
-
-				df1.setTimeZone(TimeZone.getDefault());
-				Log.v("debug:local", df1.format(d));
-
-				df1.setTimeZone(TimeZone.getTimeZone("America/New_York"));
-				Log.v("debug:America/New_York", df1.format(d));
-
-				df1.setTimeZone(TimeZone.getTimeZone("Japan"));
-				Log.v("debug:Japan", df1.format(d));
  */
-				
+			    
 				/*
 				String[] tzIDs = TimeZone.getAvailableIDs();
 				for ( i = 0; i < tzIDs.length; i++ ) {
 					Log.v("debug:TimeZoneIDs", tzIDs[i]);
 				}
 				 */
-			    
-			    //			    DateFormat df2 = new SimpleDateFormat("yyyy/MM/dd hh:mm zzz", java.util.Locale.UK);
-//			    DateFormat df2 = new SimpleDateFormat("yyyy/MM/dd hh:mm", java.util.Locale.UK);
 
 				// Proton Density
 				preparedData[j][1] = cell[7];
