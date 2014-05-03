@@ -227,7 +227,8 @@ public class CameraFragment extends Fragment {
 		}
 
 		// テキストビューのテキストを設定します
-		mStatusTextView.setText(value[0] + "(UTC)\n" + alertText);
+		mStatusTextView.setText(value[0] + "\n" + alertText);
+//		mStatusTextView.setText(value[0] + "(UTC)\n" + alertText);
 
 	}
 }
