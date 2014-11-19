@@ -22,13 +22,7 @@ public class DataProvider {
 	private int i, iSize;  // 読み込んだデータ配列のカウンタとデータの個数
 	private int j, jSize;  // 整形済みデータ配列のカウンタとデータの個数
 
-	// 0-100に正規化したデータ
-	// 0: yyyy/mm/dd hh:mm
-	// 1: Proton Density
-	// 2: Bulk Speed
-	// 3: xr Short
-	// 4: xr Long
-	private String[] ret = new String[5];
+//	private String[] ret = new String[5];
 //	private String[] ret;
 	
 //	private float[] minValue, maxValue, nowF;
@@ -41,122 +35,19 @@ public class DataProvider {
 	private boolean debug = false;
 	private Vector rec, rec2;
 	private String[] cell;
+
+	// データを格納しておく配列
+	// 0: yyyy/mm/dd hh:mm
+	// 1: Proton Density(0-100に正規化したデータ)
+	// 2: Bulk Speed(0-100に正規化したデータ)
+	// 3: xr Short(0-100に正規化したデータ)
+	// 4: xr Long(0-100に正規化したデータ)
+	// 5: 現在のデータの位置(0-100に正規化したデータ)
 	private String[][] preparedData;  // 整形済みデータ配列
-
-	// コンストラクタ ※色々と古いので使わないこと
-	public DataProvider ( Vector data ) {
-//		time1 = time2 = System.currentTimeMillis();
-//		temp = 0;
-
-		//	  タブ区切りファイルの読み込み
-//		// Moverioだったら
-//		if ( Build.MODEL.equals("embt2") ) {
-//			rec = Csv.read("/mnt/sdcard/Ace_1401peak_1h.csv");
-//		} else {
-//			rec = Csv.read("/storage/emulated/0/Ace_1401peak_1h.csv");
-//		}
-//		rec = Csv.read(Environment.getExternalStorageDirectory().getPath() + "/Ace_1401peak_1h.csv");
-		rec = (Vector) data.clone();
-
-		if ( rec == null ) return;
-		else {
-			iSize = rec.size();
-//			Log.v("debug:iSize", String.valueOf(iSize));
-			preparedData = new String[rec.size()][5];
-
-			// 最終的に使う要素数で初期化
-/*
-			ret = new String[5];
-			minValue = new float[5];
-			maxValue = new float[5];
-			nowF = new float[5];
- */
-
-			i = j = jSize = 0;
-//			Log.v("debug:iSize", String.valueOf(iSize));
-
-//			i = 3; // 最初の3行は飛ばす
-
-//			minValue[0] = minValue[1] = minValue[2] = minValue[3] = 10000000.0f;
-//			maxValue[0] = maxValue[1] = maxValue[2] = maxValue[3] = 0.0f;
-
-			// 最大値・最小値を求める
-			do {
-//				Log.v("debug:i1", String.valueOf(i));
-
-				cell = (String[])rec.elementAt(i);
-//				Log.v("debug:i4", String.valueOf(i));
-//				Log.v("debug:cell0", cell[0]);
-
-				// エラーデータ（0以外）は読み飛ばす
-//				if ( Integer.parseInt(cell[9]) != 0 || Integer.parseInt(cell[6]) != 0 ) {
-				if ( Integer.parseInt(cell[6]) != 0 ) {
-				//if ( Integer.parseInt(cell[11]) != 0 ) {
-					//Log.v("debug:i3", String.valueOf(i));
-					i++;
-					continue;
-				}
-
-//				Log.v("debug:i2", String.valueOf(i));
-
-				// 年月日日時
-				preparedData[j][0] = cell[0] + "/" + cell[1] + "/" + cell[2] + " " + cell[3].substring(0, 2) + ":" + cell[3].substring(2, 4);
-				Log.v("debug:", preparedData[j][0]);
-
-				// Proton Density
-				preparedData[j][1] = cell[7];
-				nowF[1] = Float.valueOf(cell[7]);
-
-				// Bulk Speed
-				preparedData[j][2] = cell[8];
-				nowF[2] = Float.valueOf(cell[8]);
-
-				// 一番最初は現在の値をmaxとminにセットする
-				if ( i == 0 ) {
-					maxValue[1] = minValue[1] = nowF[1]; 
-					maxValue[2] = minValue[2] = nowF[2];
-				}
-
-				if ( maxValue[1] < nowF[1] ) maxValue[1] = nowF[1];
-				if ( minValue[1] > nowF[1] ) minValue[1] = nowF[1];
-				if ( maxValue[2] < nowF[2] ) maxValue[2] = nowF[2];
-				if ( minValue[2] > nowF[2] ) minValue[2] = nowF[2];
-
-				i++;
-				j++;
-
-			} while ( i < iSize );
-			
-			jSize = j;
-			j = 0;
-			
-			// 0-100に変換
-			for ( i = 0; i < jSize; i++ ) {
-				fTemp = Float.valueOf(preparedData[i][1]) - minValue[1];
-				preparedData[i][1] = String.valueOf( (int)(fTemp / ( maxValue[1] - minValue[1] ) * 100 ));
-
-				fTemp = Float.valueOf(preparedData[i][2]) - minValue[2];
-				preparedData[i][2] = String.valueOf( (int)(fTemp / ( maxValue[2] - minValue[2] ) * 100 ));
-
-				preparedData[i][3] = preparedData[i][1];
-				preparedData[i][4] = preparedData[i][2];
-				
-			}
-		}
-//		Log.v("debug:max/minValue[1]", String.valueOf(maxValue[1]) + ", " + String.valueOf(minValue[1]));
-//		Log.v("debug:max/minValue[2]", String.valueOf(maxValue[2]) + ", " + String.valueOf(minValue[2]));
-//		Log.v("debug:minValue[0]", String.valueOf(minValue[0]));
-//		Log.v("debug:maxValue[1]", String.valueOf(maxValue[1]));
-//		Log.v("debug:minValue[1]", String.valueOf(minValue[1]));
-//		Log.v("debug:maxValue[2]", String.valueOf(maxValue[2]));
-//		Log.v("debug:minValue[2]", String.valueOf(minValue[2]));
-//		Log.v("debug:maxValue[3]", String.valueOf(maxValue[3]));
-//		Log.v("debug:minValue[3]", String.valueOf(minValue[3]));
-	}
 
 	// コンストラクタ
 	public DataProvider ( Vector data, Vector data2 ) {
-		Log.v("debug:DataProvider", "Start");
+		Log.v("Apollon", "DataProvider: Start");
 		rec = (Vector) data.clone();
 		rec2 = (Vector) data2.clone();
 
@@ -165,7 +56,7 @@ public class DataProvider {
 		else {
 			iSize = rec.size();
 //			Log.v("debug:iSize", String.valueOf(iSize));
-			preparedData = new String[rec.size()][5];
+			preparedData = new String[rec.size()][6];
 
 			i = j = jSize = 0;
 //			Log.v("debug:iSize", String.valueOf(iSize));
@@ -362,10 +253,14 @@ public class DataProvider {
 				fTemp = Float.valueOf(preparedData[i][4]) - minValue[4];
 				preparedData[i][4] = String.valueOf( (int)(fTemp / ( maxValue[4] - minValue[4] ) * 100 ));
 
-//				preparedData[i][3] = preparedData[i][1];
-//				preparedData[i][4] = preparedData[i][2];
+				preparedData[i][5] = String.valueOf( (int)(i * 100 / jSize ) );
+//				Log.v("Apollon", "preparedData[i][5]: " + preparedData[i][5]);
 				
 			}
+			
+			// データ数を保存
+//			iDataSize = i;
+//			Log.v("Apollon", "iSize: " + iSize + ", jSize: " + jSize);
 		}
 //		Log.v("debug:DataProvider", "End");
 	}
@@ -430,6 +325,9 @@ public class DataProvider {
 */
 		j++;
 		if ( j >= jSize ) j = 0;
+		
+//		iDataNow = j;
+//		Log.v("debug:DataProvider", "iDataNow: " + iDataNow );
 
 		return preparedData[j];
 

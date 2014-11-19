@@ -90,7 +90,7 @@
 						android:layout_height="fill_parent" />
 				</LinearLayout>
 
-				<!-- プログレスバー3個目 -->
+				<!-- スペース開ける用 -->
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
  -->
 				</LinearLayout>
 
-				<!-- プログレスバー4個目 -->
+				<!-- プログレスバー3個目 -->
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
 						android:layout_height="fill_parent" />
  				</LinearLayout>
 
-				<!-- プログレスバー5個目 -->
+				<!-- プログレスバー4個目 -->
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -197,24 +197,53 @@
 		</LinearLayout>
 	</LinearLayout>
 
+	<!-- 画面下部に配置する要素表示用 -->
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical"
+		android:gravity="bottom"
+		android:theme="@android:style/Theme.Translucent" >
+
 		<LinearLayout
 		    android:layout_width="match_parent"
-		    android:layout_height="match_parent"
-		    android:orientation="horizontal"
-			android:gravity="bottom"
-		>
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal" >
 
-			<!-- おしらせ表示用TextView(テスト用) -->
 			<TextView
-			    android:id="@+id/textStatusView"
-			    android:layout_width="fill_parent"
+			    android:id="@+id/textViewDatetime"
+			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
-			    android:background="#77FFFFFF"
 			    android:padding="5dp"
-			    android:text="Downloading solar data...\nPlease wait for a while!"
+			    android:text="YYYY/MM/DD hh:mm"
 			    android:textAppearance="?android:attr/textAppearanceMedium"
-			    android:textColor="#FFFFAA00"
-				android:textSize="20sp" />
+			    android:background="#777777"
+			    android:textColor="#0000FF"
+			    android:textSize="15sp" />
 
+			<ProgressBar
+				android:id="@+id/progressBarDatetime"
+				style="?android:attr/progressBarStyleHorizontal"
+				android:padding="5dp"
+				android:progressDrawable="@drawable/progressbar_blue"
+				android:layout_width="fill_parent"
+				android:layout_height="15pt"
+			/>
 		</LinearLayout>
+				    	    
+		<TextView
+		    android:id="@+id/textStatusView"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:background="#777777"
+		    android:padding="5dp"
+		    android:text="Downloading solar data... Please wait for a while!"
+		    android:textAppearance="?android:attr/textAppearanceMedium"
+		    android:textColor="#FFFFAA00"
+		    android:textSize="20sp"
+			android:gravity="bottom"
+        />
+
+	</LinearLayout>
+	
 </RelativeLayout>

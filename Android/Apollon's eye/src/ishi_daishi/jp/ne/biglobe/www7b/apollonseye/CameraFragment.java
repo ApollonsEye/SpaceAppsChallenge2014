@@ -31,11 +31,13 @@ public class CameraFragment extends Fragment {
 	// プログレスバー
 	private ProgressBar mProgressBar1 = null;
 	private ProgressBar mProgressBar2 = null;
-	private ProgressBar mProgressBar3 = null;
+//	private ProgressBar mProgressBar3 = null;
 	private ProgressBar mProgressBar4 = null;
 	private ProgressBar mProgressBar5 = null;
+	private ProgressBar mProgressBarDatetime = null;
 	// テキストビュー
 	private TextView mStatusTextView = null;
+	private TextView mTextViewDatetime = null;
 	// オーバーレイ用のビュー
 	OverlaySurfaceView mOverlayView = null;
 
@@ -115,6 +117,8 @@ public class CameraFragment extends Fragment {
 		mProgressBar4.setMax(100);
 		mProgressBar5 = (ProgressBar)mRootView.findViewById(R.id.progressBar5);
 		mProgressBar5.setMax(100);
+		mProgressBarDatetime = (ProgressBar)mRootView.findViewById(R.id.progressBarDatetime);
+		mProgressBarDatetime.setMax(100);
 
 		// ステータス表示用のテキストビューを取得
 		mStatusTextView = (TextView)mRootView.findViewById(id.textStatusView);
@@ -130,6 +134,9 @@ public class CameraFragment extends Fragment {
 			TextView textView5 = (TextView)mRootView.findViewById(id.textView5);
 			textView5.setTextSize(30);
 		}
+
+		// 日時表示用のテキストビューを取得
+		mTextViewDatetime = (TextView)mRootView.findViewById(id.textViewDatetime);
 
 		// Moverioの場合、全画面表示する
 //		Window win = getWindow();
@@ -193,7 +200,7 @@ public class CameraFragment extends Fragment {
 //		mProgressBar3.setProgress(Integer.valueOf(value[2]));
 		mProgressBar4.setProgress(Integer.valueOf(value[3]));
 		mProgressBar5.setProgress(Integer.valueOf(value[4]));
-
+		mProgressBarDatetime.setProgress(Integer.valueOf(value[5]));
 
 		// ステータスアイコンと警告文の変更
 		// いずれかの値が70%以上の場合は危険
@@ -227,7 +234,8 @@ public class CameraFragment extends Fragment {
 		}
 
 		// テキストビューのテキストを設定します
-		mStatusTextView.setText(value[0] + "(UTC)\n" + alertText);
+		mTextViewDatetime.setText(value[0] + "(UTC)");
+		mStatusTextView.setText(alertText);
 
 	}
 }
