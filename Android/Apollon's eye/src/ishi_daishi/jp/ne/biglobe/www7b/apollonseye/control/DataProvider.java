@@ -84,7 +84,29 @@ public class DataProvider {
 //				Log.v("debug:i2", String.valueOf(i));
 
 				// 年月日日時
-				preparedData[j][0] = cell[0] + "/" + cell[1] + "/" + cell[2] + " " + cell[3].substring(0, 2) + ":" + cell[3].substring(2, 4);
+				// convert to Calendar by tachibana
+				int year = Integer.parseInt(cell[0]);
+				int month = Integer.parseInt(cell[1]);
+				int day = Integer.parseInt(cell[2]);
+				int hour = Integer.parseInt(cell[3].substring(0, 2));
+				int minute = Integer.parseInt(cell[3].substring(2, 4));
+				
+				Calendar calendar = Calendar.getInstance();
+				calendar.set(Calendar.YEAR, year);			// year
+				calendar.set(Calendar.MONTH, month-1);		// month(0~11)
+				calendar.set(Calendar.DAY_OF_MONTH, day);	// day
+				calendar.set(Calendar.HOUR_OF_DAY, hour);	// hour
+				calendar.set(Calendar.MINUTE, minute);		// minute
+				calendar.set(Calendar.SECOND, 0);			// second
+				calendar.set(Calendar.MILLISECOND, 0);		// millisecond
+				
+				// UTC -> Local TimeZone
+				TimeZone tzLocal = TimeZone.getDefault();
+				long offset = tzLocal.getRawOffset();
+				calendar.setTimeInMillis(offset + calendar.getTimeInMillis());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+				preparedData[j][0] = sdf.format(calendar.getTime()) + "(" + tzLocal.getID() + ")";
+//				preparedData[j][0] = cell[0] + "/" + cell[1] + "/" + cell[2] + " " + cell[3].substring(0, 2) + ":" + cell[3].substring(2, 4);
 
 /*
 				// Calendarで日付処理を行う
