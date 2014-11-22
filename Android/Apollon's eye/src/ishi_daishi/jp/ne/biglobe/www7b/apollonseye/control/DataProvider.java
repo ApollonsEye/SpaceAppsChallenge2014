@@ -19,6 +19,8 @@ import android.util.Log;
 // ＜変更履歴＞
 //	14/04/12 初版作成
 public class DataProvider {
+	private final String TAG = DataProvider.class.getCanonicalName();
+	private final boolean DEBUG = true;
 	private int i, iSize;  // 読み込んだデータ配列のカウンタとデータの個数
 	private int j, jSize;  // 整形済みデータ配列のカウンタとデータの個数
 

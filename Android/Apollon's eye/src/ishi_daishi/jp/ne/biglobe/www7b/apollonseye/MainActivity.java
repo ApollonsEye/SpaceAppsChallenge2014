@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +44,8 @@ public class MainActivity extends Activity {
 
 	// メインのカメラを表示するフラグメント
 	private CameraFragment mCameraFragment = null;
+	// データロード待ちのプログレスダイアログ
+	private ProgressDialog mProgressDialog = null;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,14 @@ public class MainActivity extends Activity {
 			intentPeriodic.setAction(ACTION_APPLI_MODE_DEMO);
 		}
 		startService(intentPeriodic);
+		
+		// データロード待ちプログレスダイアログの表示開始
+		mProgressDialog = new ProgressDialog(this);
+		mProgressDialog.setTitle("Data Loading");	// タイトル
+		mProgressDialog.setMessage("Please wait.");	// メッセージ
+		mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);	// 表示スタイル
+		mProgressDialog.setCancelable(false);		// キャンセルボタンなし
+		mProgressDialog.show();
 	}
 
 	@Override
@@ -106,6 +117,12 @@ public class MainActivity extends Activity {
 		Intent intentPeriodic = new Intent();
 		intentPeriodic.setClass(getApplicationContext(), PeriodicService.class);
 		stopService(intentPeriodic);
+		
+		// データロード待ちプログレスダイアログの停止
+		if(mProgressDialog != null) {
+			mProgressDialog.dismiss();
+			mProgressDialog = null;
+		}
 	}
 
 	@Override
@@ -145,6 +162,11 @@ public class MainActivity extends Activity {
 	 */
 	private void receiveIntent(Intent intent) {
 		Log.d(TAG, "receiveIntent");
+		
+		// データ待ちプログレスダイアログの非表示
+		if(mProgressDialog != null && mProgressDialog.isShowing()) {
+			mProgressDialog.dismiss();
+		}
 
 		// データ取得
 		String[] value = intent.getStringArrayExtra(PeriodicService.EXTRA_STRING_VALUES);

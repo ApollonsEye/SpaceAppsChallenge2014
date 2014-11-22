@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="ishi_daishi.jp.ne.biglobe.www7b.apollonseye"
-	android:versionCode="2"
-	android:versionName="0.76" >
+	android:versionCode="100"
+	android:versionName="1.00" >
 
 	<uses-sdk
 		android:minSdkVersion="14"
