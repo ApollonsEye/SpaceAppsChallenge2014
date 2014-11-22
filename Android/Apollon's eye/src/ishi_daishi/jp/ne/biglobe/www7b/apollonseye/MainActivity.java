@@ -60,6 +60,9 @@ public class MainActivity extends Activity {
 		ActionBar actionBar = getActionBar();
 		actionBar.hide();
 
+		//画面を点灯したままにする
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		
 		// メインのカメラを表示するフラグメントを作成
 		mCameraFragment = new CameraFragment();
 
